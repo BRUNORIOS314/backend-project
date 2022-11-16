@@ -14,7 +14,7 @@ app.set("views", "./views");
 app.set("view engine", "pug");
 
 app.use("/", routers);
-app.use("static", express.static(__dirname + "public"));
+app.use("/public", express.static("public"));
 
 app.get("/", (req, res) => {
     res.render("formulario");

@@ -1,11 +1,12 @@
 html(lang="en")
     head
+        link(rel="stylesheet", href="pug\public\css\lista.css"
+        )
         title='Lista en PUG'
     body
         a(
             href="/" 
-            class="ref"
-            )='Ir a formulario'
+        )='Ir a formulario'
         h2='Productos'
         if productos.length !== 0
             table
@@ -20,10 +21,10 @@ html(lang="en")
                         td= i.price
                         <td>
                             img(
-                            class="img"
+                            .img
                             src=i.thumbnail
                             alt="imagen del producto"
-                        )
+                            )
 
         else
             h3='No hay productos agregados!'

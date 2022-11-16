@@ -1,6 +1,7 @@
 const express = require("express");
 const bp = require("body-parser");
 const routers = require("./routers");
+const handlebars = require("express-handlebars");
 const Contenedor = require("./controllers/productsController");
 const productos = new Contenedor("./controllers/productos.json");
 const app = express();
@@ -10,13 +11,26 @@ const PORT = 8080;
 app.use(bp.json());
 app.use(bp.urlencoded({ extended: true }));
 
-app.set("view engine", "ejs");
+app.engine(
+    "hbs",
+    handlebars.engine({
+        extname: "hbs",
+        defaultLayout: "index.hbs",
+        layoutsDir: __dirname + "/views",
+    })
+);
+
+app.set("views", "./views");
+app.set("view engine", "hbs");
 
 app.use("/", routers);
 app.use(express.static("public"));
 
 app.get("/", (req, res) => {
-    res.render("formulario");
+    res.render("formulario", {
+        style: "formulario.css",
+        title: "Formulario Handlebars",
+    });
 });
 
 app.post("/", async (req, res) => {
